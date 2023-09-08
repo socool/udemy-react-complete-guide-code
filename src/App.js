@@ -1,10 +1,13 @@
+import ExpenseItem from "./components/ExpenseItem";
+
 function App() {
-  const para = document.createElement("p");
-  para.textContent = "Hello World!";
+  const para = document.createElement("h1");
+  para.textContent = "Exercise done!";
   document.getElementById("root").appendChild(para);
   return (
     <div>
-      <h2>Let's get started!</h2>
+      <p>Practicing React...</p>
+      <ExpenseItem />
     </div>
   );
 }
