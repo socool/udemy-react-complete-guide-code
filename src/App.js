@@ -1,4 +1,5 @@
-import Expenses from "./components/Expenses";
+import React from "react";
+import Expenses from "./components/Expenses/Expenses";
 
 function App() {
   //const para = document.createElement("h1");
@@ -19,12 +20,20 @@ function App() {
       date: new Date(2021, 2, 28),
     },
   ];
-  return (
-    <div>
-      <p>Practicing React...</p>
-      <Expenses expenses={expenses} />
-    </div>
+  //need at least 1 element
+  return React.createElement(
+    "div",
+    {},
+    React.createElement("h2", {}, "Let's get started!"),
+    React.createElement(Expenses, { expenses })
   );
+  /*
+    return (
+      <div>
+        <p>Practicing React...</p>
+        <Expenses expenses={expenses} />
+      </div>
+    );*/
 }
 
 export default App;
