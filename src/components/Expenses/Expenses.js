@@ -8,6 +8,9 @@ function Expenses(props) {
   const [filterYear, setFilterYear] = useState("2023");
   const expenses = props.expenses;
 
+  const filterExpenses = expenses.filter((expense) => {
+    return expense.date.getFullYear().toString() === filterYear;
+  });
   /*
   let filterInfoText = "2019,2021 & 2022";
 
@@ -36,7 +39,7 @@ function Expenses(props) {
           onChangeFilter={filterChangeHandler}
         />
         <p>Data for years filterInfoText is hidden.</p>
-        {expenses.map((expense) => (
+        {filterExpenses.map((expense) => (
           <ExpenseItem
             key={expense.id}
             title={expense.title}
