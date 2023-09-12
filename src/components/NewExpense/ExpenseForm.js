@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "./ExpenseForm.css";
 
 const ExpenseForm = () => {
-  //const [enteredTitle, setEnteredTitle] = useState("");
-  //const [enteredAmount, setEnteredAmount] = useState("");
-  //const [enteredDate, setEnteredDate] = useState("");
+  const [enteredTitle, setEnteredTitle] = useState("");
+  const [enteredAmount, setEnteredAmount] = useState("");
+  const [enteredDate, setEnteredDate] = useState("");
 
   const [userInput, setUserInput] = useState({
     enteredTitle: "",
@@ -15,9 +15,16 @@ const ExpenseForm = () => {
   const titleChangeHandler = (event) => {
     //console.log(event.target.value);
     //setEnteredTitle(event.target.value);
-    setUserInput({
+
+    /*setUserInput({
       ...userInput, //use spread operator for separating data in arrays to individual elements
       enteredTitle: event.target.value,
+    });
+    */
+
+    //store previous state
+    setUserInput((prevState) => {
+      return { ...prevState, enteredTitle: event.target.value };
     });
   };
 
@@ -35,14 +42,37 @@ const ExpenseForm = () => {
     });
   };
 
-  useState("");
+  const inputChangeHandler = (identifier, value) => {
+    if (identifier === "title") {
+      setEnteredTitle(value);
+    } else if (identifier === "date") {
+      setEnteredDate(value);
+    } else {
+      setEnteredAmount(value);
+    }
+  };
+
+  const sumbitHandler = (event) => {
+    event.preventDefault(); //default javascript event prevent from reloading page
+    const expenseData = {
+      title: enteredTitle,
+      amount: +enteredAmount,
+      date: new Date(enteredDate),
+    };
+    console.log(expenseData);
+  };
 
   return (
-    <form>
+    <form onSubmit={sumbitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
-          <input type="text" onChange={titleChangeHandler} />
+          <input
+            type="text"
+            onChange={(event) =>
+              inputChangeHandler("title", event.target.value)
+            }
+          />
         </div>
         <div className="new-expense__control">
           <label>Amount</label>
@@ -50,7 +80,9 @@ const ExpenseForm = () => {
             type="number"
             min="0.01"
             step="0.01"
-            onChange={amountChangeHandler}
+            onChange={(event) =>
+              inputChangeHandler("amount", event.target.value)
+            }
           />
         </div>
         <div className="new-expense__control">
@@ -59,7 +91,7 @@ const ExpenseForm = () => {
             type="date"
             min="2023-01-01"
             max="2023-12-31"
-            onChange={dateChangeHandler}
+            onChange={(event) => inputChangeHandler("date", event.target.value)}
           />
         </div>
         <div className="new-expense__control">
