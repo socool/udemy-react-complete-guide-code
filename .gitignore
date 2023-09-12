@@ -188,3 +188,8 @@ thumb
 sketch
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,node,react
+**/.build
+**/build
+build/*
+!build/build.xml
+build
