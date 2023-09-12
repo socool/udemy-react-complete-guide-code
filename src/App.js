@@ -21,20 +21,27 @@ function App() {
       date: new Date(2021, 2, 28),
     },
   ];
+
+  const addExpenseHandler = (expense) => {
+    console.log("in App.js");
+    console.log(expense);
+  };
+
   //need at least 1 element
-  return React.createElement(
-    "div",
-    {},
-    React.createElement(NewExpense),
-    React.createElement(Expenses, { expenses })
+  return (
+    <div>
+      <NewExpense onAddExpense={addExpenseHandler} />
+      <Expenses expenses={expenses} />
+    </div>
   );
   /*
-    return (
-      <div>
-        <p>Practicing React...</p>
-        <Expenses expenses={expenses} />
-      </div>
-    );*/
+    React.createElement(
+      "div",
+      {},
+      React.createElement(NewExpense),
+      React.createElement(Expenses, { expenses })
+    );
+    */
 }
 
 export default App;
