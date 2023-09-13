@@ -3,9 +3,10 @@ import "./Expenses.css";
 import React, { useState } from "react";
 import ExpensesFilter from "./ExpensesFilter";
 import Card from "../UI/Card";
+import ExpensesList from "./ExpensesList";
 
 function Expenses(props) {
-  const [filterYear, setFilterYear] = useState("2023");
+  const [filterYear, setFilterYear] = useState("2022");
   const expenses = props.expenses;
 
   const filterExpenses = expenses.filter((expense) => {
@@ -24,7 +25,6 @@ function Expenses(props) {
     filterInfoText = "2019, 2020 & 2021";
   }
   */
-
   const filterChangeHandler = (selectedYear) => {
     console.log("in Expenses.js");
     console.log(selectedYear);
@@ -32,25 +32,16 @@ function Expenses(props) {
   };
 
   return (
-    <div>
+    <li>
       <Card className="expenses">
         <ExpensesFilter
           selected={filterYear}
           onChangeFilter={filterChangeHandler}
         />
         <p>Data for years filterInfoText is hidden.</p>
-        {filterExpenses.length === 0 && <p>No expenses found.</p>}
-        {filterExpenses.length > 0 &&
-          filterExpenses.map((expense) => (
-            <ExpenseItem
-              key={expense.id}
-              title={expense.title}
-              amount={expense.amount}
-              date={expense.date}
-            />
-          ))}
+        <ExpensesList expenses={filterExpenses} />
       </Card>
-    </div>
+    </li>
   );
 }
 export default Expenses;
